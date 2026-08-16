@@ -1,0 +1,26 @@
+# ci.yml — TRAINEE STARTER (skeleton)
+# Complete this during Module 11 (CI/CD Integration & UAT Protection Gates).
+# Target pipeline: lint -> type-check -> unit tests -> regression suite -> diff gate.
+# See /solutions/ci.SOLUTION.yml for a completed reference version —
+# instructor use only, do not distribute before Module 11 is complete.
+
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r requirements.txt flake8
+
+      # TODO: add lint step (flake8)
+      # TODO: add unit test step (pytest --cov)
+      # TODO: add regression suite step
+      # TODO: add diff gate step — fail the build if any file listed in
+      #       .cursorrules NEVER_MODIFY appears in `git diff --name-only`

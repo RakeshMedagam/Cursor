@@ -1,0 +1,40 @@
+# ci.yml — INSTRUCTOR REFERENCE SOLUTION (Module 11)
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed so diff gate can compare against main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt flake8
+
+      - name: Lint (flake8)
+        run: flake8 app/ --max-line-length=100
+
+      - name: Unit tests + coverage
+        run: pytest --cov=app --cov-report=term-missing --cov-fail-under=80
+
+      - name: Regression suite
+        run: pytest tests/test_baseline_forecast.py -v
+
+      - name: UAT diff gate
+        run: |
+          LOCKED_FILES="app/baseline_forecast.py app/data_ingestion.py app/shared_utils.py app/auth/session.py app/cart.py app/checkout.py app/payments.py"
+          CHANGED=$(git diff --name-only origin/main...HEAD)
+          for f in $LOCKED_FILES; do
+            if echo "$CHANGED" | grep -q "^$f$"; then
+              echo "BLOCKED: UAT-locked file modified: $f"
+              exit 1
+            fi
+          done
+          echo "Diff gate passed — no UAT-locked files were modified."

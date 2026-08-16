@@ -1,0 +1,45 @@
+# .cursorrules — INSTRUCTOR REFERENCE SOLUTION
+# Completed version of the Module 2/3/1b exercises. Use to check trainee
+# submissions or to unblock a stuck group — do not distribute up front.
+
+## Project Context
+This is a small Retail/CPG-style analytics service: it ingests sales data,
+produces baseline demand forecasts, and supports a simple cart/checkout
+flow. It exists to teach safe, scoped use of Cursor around UAT-protected
+code — it is not a real client system.
+
+## Coding Standards
+- Python 3.11, PEP 8, type hints on all new public functions.
+- Docstrings (Google style) required on every new public function/class.
+- No bare `except:` — always catch a specific exception.
+- Currency values always pass through `shared_utils.round_currency`.
+- New modules go in `app/`; new tests go in `tests/` with a matching filename
+  (`app/foo.py` -> `tests/test_foo.py`).
+
+## NEVER_MODIFY
+- app/baseline_forecast.py
+- app/data_ingestion.py
+- app/shared_utils.py
+- app/auth/session.py
+- app/cart.py
+- app/checkout.py
+- app/payments.py
+
+## Prompt Templates
+
+### Template: "Add a new read-only analytics module"
+Task: Create a new module `app/<name>.py` that reads from <existing module>
+without modifying it.
+Scope: Only create new file(s) under app/ and tests/. Do not edit any file
+listed in NEVER_MODIFY above.
+Constraint: Follow the Coding Standards section. Include type hints and a
+docstring on every public function.
+Output format: Full file contents for the new module, plus a matching test
+file with at least 3 test cases (happy path, edge case, invalid input).
+
+### Template: "Fix a specific bug without touching unrelated code"
+Task: Fix the bug described below in <file>: <bug description>.
+Scope: Only change the minimum lines needed inside <file>. Do not refactor
+unrelated code in the same file.
+Constraint: Do not change the function's public signature or return type.
+Output format: A unified diff, plus one sentence explaining the root cause.

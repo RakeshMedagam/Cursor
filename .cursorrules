@@ -1,0 +1,21 @@
+# .cursorrules — TRAINEE STARTER (skeleton)
+# Fill this in during Module 2 (Enterprise Setup) and extend it during
+# Module 3 (Prompting) and Module 1b (Reusable Skills).
+# See /solutions/.cursorrules.SOLUTION for a completed reference version —
+# instructor use only, do not distribute before Module 2 is complete.
+
+## Project Context
+# TODO: describe what this repo does, in 2-3 lines.
+
+## Coding Standards
+# TODO: naming conventions, formatting rules, docstring requirements.
+
+## NEVER_MODIFY
+# TODO: list every UAT-locked file path here. Cursor should refuse to
+# suggest changes to anything listed below.
+# Example:
+# - app/baseline_forecast.py
+# - app/data_ingestion.py
+
+## Prompt Templates
+# TODO (Module 3+): add reusable prompt blocks here as your team builds them.
